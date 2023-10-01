@@ -1,0 +1,887 @@
+[gd_scene load_steps=51 format=3 uid="uid://co1hdf18warqm"]
+
+[ext_resource type="Script" path="res://src/rooms/LockerFront.gd" id="1_b3ky1"]
+[ext_resource type="Texture2D" uid="uid://beaaa6piawapb" path="res://assets/sprites/locker_front.png" id="1_jly2u"]
+[ext_resource type="Texture2D" uid="uid://bpeifocp8aj0" path="res://assets/sprites/outside.png" id="2_5bbtb"]
+[ext_resource type="Script" path="res://src/rooms/PlayerCamera.gd" id="2_5df45"]
+[ext_resource type="Script" path="res://src/rooms/MonsterManager.gd" id="2_v3844"]
+[ext_resource type="PackedScene" uid="uid://3b7finkmm3c5" path="res://src/monster/Monster.tscn" id="3_gbb38"]
+[ext_resource type="Script" path="res://src/phone/TabletDevice.gd" id="3_je40m"]
+[ext_resource type="FontFile" uid="uid://bkkp7t6seakgk" path="res://assets/fonts/dogicapixel.ttf" id="3_m1xg6"]
+[ext_resource type="Texture2D" uid="uid://d2wg3yg5l85xi" path="res://assets/sprites/tablet.png" id="3_qam55"]
+[ext_resource type="PackedScene" uid="uid://dnvo7d2f23xxc" path="res://src/phone/CodeWindow.tscn" id="3_vh53a"]
+[ext_resource type="AudioStream" uid="uid://bf80t3w1t74et" path="res://assets/sfx/player_breathing.wav" id="4_6u32f"]
+[ext_resource type="PackedScene" uid="uid://bovf8rv1i70c7" path="res://src/phone/HelpWindow.tscn" id="5_7ir57"]
+[ext_resource type="PackedScene" uid="uid://j6sbkg6f0j6i" path="res://src/phone/VariableWindow.tscn" id="5_cdqy1"]
+[ext_resource type="AudioStream" uid="uid://dwbvtvcje7de2" path="res://assets/sfx/horror.ogg" id="5_sc0hl"]
+[ext_resource type="Script" path="res://src/monster/HorrorMusic.gd" id="6_0ccgt"]
+[ext_resource type="Script" path="res://src/mangers/CommandManager.gd" id="6_4wfa1"]
+[ext_resource type="Shader" path="res://src/shaders/crt.gdshader" id="7_j4aws"]
+[ext_resource type="AudioStream" uid="uid://di7r2vn54xjr5" path="res://assets/sfx/banging1.wav" id="7_j7141"]
+[ext_resource type="AudioStream" uid="uid://24rxkovu0gu7" path="res://assets/sfx/footsteps1.wav" id="8_8e4ex"]
+[ext_resource type="Texture2D" uid="uid://dcs3bgvcliouc" path="res://assets/sprites/call_number.png" id="8_q8qq8"]
+[ext_resource type="Texture2D" uid="uid://docthfg3cy2em" path="res://assets/sprites/flashlight.png" id="9_yv5yu"]
+[ext_resource type="AudioStream" uid="uid://c4wc0c57ncivn" path="res://assets/sfx/ringtone.wav" id="10_qt6ca"]
+[ext_resource type="Script" path="res://src/objects/FlashLight.gd" id="10_w36uy"]
+[ext_resource type="AudioStream" uid="uid://bv8pkfsbyotaa" path="res://assets/sfx/security_quote.wav" id="11_lfeam"]
+[ext_resource type="AudioStream" uid="uid://bcyar8ebbt8qr" path="res://assets/sfx/monster_breathing.wav" id="12_bbkp0"]
+[ext_resource type="AudioStream" uid="uid://bgt5taf56yy1y" path="res://assets/sfx/gunshot.wav" id="12_rpqnk"]
+[ext_resource type="AudioStream" uid="uid://ctg3wm7v6mln5" path="res://assets/sfx/monster_roar.wav" id="14_h6ggk"]
+[ext_resource type="AudioStream" uid="uid://448eumy31jlc" path="res://assets/sfx/noise.wav" id="17_me2qp"]
+[ext_resource type="AudioStream" uid="uid://bc6nufovyxsg8" path="res://assets/sfx/ambience1.ogg" id="18_ye0ol"]
+[ext_resource type="Texture2D" uid="uid://dtc0yow14ivdd" path="res://assets/sprites/monster/monster.png" id="24_d133l"]
+[ext_resource type="Script" path="res://src/monster/MonsterDeath.gd" id="25_e406g"]
+[ext_resource type="Texture2D" uid="uid://e0o2kbwniieg" path="res://assets/sprites/monster/teeth.png" id="25_lbhh3"]
+[ext_resource type="AudioStream" uid="uid://bit8s03gwgvmu" path="res://assets/sfx/monster_scream.wav" id="28_gnk7g"]
+
+[sub_resource type="Animation" id="Animation_6b88t"]
+resource_name = "slow_walk_left"
+length = 9.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Monster:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2, 2.8, 3.5, 4.5, 5.2, 6, 7, 7.8, 8.5),
+"transitions": PackedFloat32Array(1, 2, 0.5, 2, 2, 0.5, 1, 2, 0.5, 1),
+"update": 0,
+"values": [Vector2(-70, 174), Vector2(-70, 174), Vector2(-20, 164), Vector2(30, 174), Vector2(30, 174), Vector2(80, 164), Vector2(130, 174), Vector2(130, 174), Vector2(180, 164), Vector2(230, 174)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Monster:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Monster/BreathingSFX:volume_db")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-80.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_p3b4d"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Monster:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-26, 174)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Monster:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Monster/BreathingSFX:volume_db")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-80.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Outside/Blood:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_t5wfu"]
+resource_name = "slow_walk_right"
+length = 8.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Monster:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7, 1.5, 2.5, 3.3, 4, 5, 5.8, 6.5),
+"transitions": PackedFloat32Array(2, 0.5, 1, 2, 0.5, 1, 2, 0.5, 1),
+"update": 0,
+"values": [Vector2(230, 174), Vector2(280, 164), Vector2(330, 174), Vector2(330, 174), Vector2(380, 164), Vector2(430, 174), Vector2(430, 174), Vector2(480, 164), Vector2(530, 174)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Monster:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(7.8),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Monster/BreathingSFX:volume_db")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 6, 8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, -80.0]
+}
+
+[sub_resource type="Animation" id="Animation_xutjh"]
+resource_name = "charge"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Monster:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.6, 2.1),
+"transitions": PackedFloat32Array(1, 0.5, 1),
+"update": 0,
+"values": [Vector2(249, 368), Vector2(249, 368), Vector2(228, 187)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Monster:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../../MonsterManager")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.9),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"bang_locker"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../../MonsterManager/Footsteps1")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Monster/RoarSFX")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Monster/BreathingSFX:volume_db")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 3.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-50.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_1h66v"]
+resource_name = "last_charge"
+length = 15.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Monster:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.6, 2.1, 10.4, 10.6),
+"transitions": PackedFloat32Array(1, 0.5, 1, 1, 1),
+"update": 0,
+"values": [Vector2(249, 368), Vector2(249, 368), Vector2(228, 187), Vector2(228, 187), Vector2(561, 187)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Monster:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../../MonsterManager")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.9),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"bang_locker"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../../MonsterManager/Footsteps1")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Monster/RoarSFX")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(2, 10),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}, {
+"args": [],
+"method": &"stop"
+}]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Monster/BreathingSFX:volume_db")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 3.5, 10.3, 10.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [-50.0, 0.0, -3.748, -80.0]
+}
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("../../MonsterManager/Security")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(6.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
+tracks/7/type = "method"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("../../MonsterManager/Gunshot")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(10.3, 11.1, 11.9, 12.3, 12.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}, {
+"args": [0.0],
+"method": &"play"
+}, {
+"args": [0.0],
+"method": &"play"
+}, {
+"args": [0.0],
+"method": &"play"
+}, {
+"args": [0.0],
+"method": &"play"
+}]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("../Outside/Blood:color")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 9.9, 10.3, 10.5, 11.1, 11.3, 11.9, 12.1, 12.3, 12.5, 12.8, 13),
+"transitions": PackedFloat32Array(1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0),
+"update": 0,
+"values": [Color(0.470588, 0.156863, 0.156863, 0), Color(0.470588, 0.156863, 0.156863, 0), Color(0.470588, 0.156863, 0.156863, 1), Color(0.470588, 0.156863, 0.156863, 0), Color(0.470588, 0.156863, 0.156863, 1), Color(0.470588, 0.156863, 0.156863, 0), Color(0.470588, 0.156863, 0.156863, 1), Color(0.470588, 0.156863, 0.156863, 0), Color(0.470588, 0.156863, 0.156863, 1), Color(0.470588, 0.156863, 0.156863, 0), Color(0.470588, 0.156863, 0.156863, 1), Color(0.470588, 0.156863, 0.156863, 0)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("../Outside/Blood:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/10/type = "method"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("../..")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(14.8),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"win_screen"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3hiiy"]
+_data = {
+"RESET": SubResource("Animation_p3b4d"),
+"charge": SubResource("Animation_xutjh"),
+"last_charge": SubResource("Animation_1h66v"),
+"slow_walk_left": SubResource("Animation_6b88t"),
+"slow_walk_right": SubResource("Animation_t5wfu")
+}
+
+[sub_resource type="Animation" id="Animation_1j0yj"]
+resource_name = "outside_fade_to_black"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Bg/Monster/OutsideBlack:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Bg/Monster/OutsideBlack:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_dtewx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Bg/Monster/OutsideBlack:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Bg/AllBlack:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_am3gg"]
+resource_name = "outside_fade_from_black"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Bg/Monster/OutsideBlack:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 0.5),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Bg/Monster/OutsideBlack:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_6ajp1"]
+resource_name = "all_fade_to_black"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Bg/AllBlack:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Bg/AllBlack:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_o6fkw"]
+resource_name = "player_death"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Bg/AllBlack:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../DeathLayer/MonsterDeath:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 7, 7.2),
+"transitions": PackedFloat32Array(1, 0.5, 1),
+"update": 0,
+"values": [Vector2(236, 750), Vector2(236, 750), Vector2(236, 300)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../DeathLayer/MonsterDeath:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Bg/AllBlack:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../DeathLayer/Scream")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(7),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("..")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(8),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"game_over"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xvjrq"]
+_data = {
+"RESET": SubResource("Animation_dtewx"),
+"all_fade_to_black": SubResource("Animation_6ajp1"),
+"outside_fade_from_black": SubResource("Animation_am3gg"),
+"outside_fade_to_black": SubResource("Animation_1j0yj"),
+"player_death": SubResource("Animation_o6fkw")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_ieqnj"]
+font = ExtResource("3_m1xg6")
+font_color = Color(1, 0, 0.219608, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tbybm"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 4
+border_width_right = 2
+border_color = Color(1, 1, 1, 1)
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sd10q"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_00tk1"]
+shader = ExtResource("7_j4aws")
+shader_parameter/size = 0.01
+shader_parameter/alpha = 0.1
+shader_parameter/shake_rate = 8.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vb1ij"]
+size = Vector2(250, 205)
+
+[node name="LockerFront" type="Node2D"]
+script = ExtResource("1_b3ky1")
+
+[node name="AnimationPlayers" type="Node" parent="."]
+
+[node name="MonsterAnimPlayer" type="AnimationPlayer" parent="AnimationPlayers"]
+root_node = NodePath("../../Bg/Monster")
+libraries = {
+"": SubResource("AnimationLibrary_3hiiy")
+}
+
+[node name="TransitionPlayer" type="AnimationPlayer" parent="AnimationPlayers"]
+libraries = {
+"": SubResource("AnimationLibrary_xvjrq")
+}
+
+[node name="CommandManager" type="Node" parent="." node_paths=PackedStringArray("code_window", "flashlight", "help_number")]
+script = ExtResource("6_4wfa1")
+code_window = NodePath("../Tablet/TabletDevice/Screen/TabContainer/Cmd")
+flashlight = NodePath("../Bg/Locker/FlashLight")
+help_number = NodePath("../Bg/Locker/HelpNumber")
+
+[node name="MonsterManager" type="Node" parent="." node_paths=PackedStringArray("monster_anim_player", "transition_anim_player", "camera", "tablet")]
+script = ExtResource("2_v3844")
+monster_anim_player = NodePath("../AnimationPlayers/MonsterAnimPlayer")
+transition_anim_player = NodePath("../AnimationPlayers/TransitionPlayer")
+camera = NodePath("../PlayerCamera")
+tablet = NodePath("../Tablet/TabletDevice")
+
+[node name="Label" type="Label" parent="MonsterManager"]
+visible = false
+offset_left = 153.0
+offset_top = 89.0
+offset_right = 305.0
+offset_bottom = 112.0
+text = "ALERTNESS: 0"
+label_settings = SubResource("LabelSettings_ieqnj")
+
+[node name="PlayerBreathingSFX" type="AudioStreamPlayer" parent="MonsterManager"]
+stream = ExtResource("4_6u32f")
+
+[node name="HorrorMusic" type="AudioStreamPlayer" parent="MonsterManager"]
+stream = ExtResource("5_sc0hl")
+volume_db = -80.0
+autoplay = true
+bus = &"Music"
+script = ExtResource("6_0ccgt")
+
+[node name="Banging1" type="AudioStreamPlayer2D" parent="MonsterManager"]
+position = Vector2(153, 89)
+stream = ExtResource("7_j7141")
+bus = &"SFX"
+
+[node name="Footsteps1" type="AudioStreamPlayer2D" parent="MonsterManager"]
+position = Vector2(153, 89)
+stream = ExtResource("8_8e4ex")
+bus = &"SFX"
+
+[node name="Ringtone" type="AudioStreamPlayer2D" parent="MonsterManager"]
+position = Vector2(153, 89)
+stream = ExtResource("10_qt6ca")
+bus = &"SFX"
+
+[node name="Security" type="AudioStreamPlayer2D" parent="MonsterManager"]
+position = Vector2(153, 89)
+stream = ExtResource("11_lfeam")
+bus = &"SFX"
+
+[node name="Gunshot" type="AudioStreamPlayer2D" parent="MonsterManager"]
+stream = ExtResource("12_rpqnk")
+
+[node name="PlayerCamera" type="Camera2D" parent="."]
+position = Vector2(250, 150)
+ignore_rotation = false
+position_smoothing_enabled = true
+rotation_smoothing_enabled = true
+rotation_smoothing_speed = 0.5
+script = ExtResource("2_5df45")
+
+[node name="Bg" type="ParallaxBackground" parent="."]
+layer = -1
+follow_viewport_enabled = true
+
+[node name="Outside" type="ParallaxLayer" parent="Bg"]
+motion_scale = Vector2(0.1, 0.1)
+
+[node name="Floor" type="Sprite2D" parent="Bg/Outside"]
+position = Vector2(251, 144)
+texture = ExtResource("2_5bbtb")
+
+[node name="Blood" type="ColorRect" parent="Bg/Outside"]
+visible = false
+offset_right = 560.0
+offset_bottom = 323.0
+color = Color(0.470588, 0.156863, 0.156863, 0)
+
+[node name="Monster" type="ParallaxLayer" parent="Bg"]
+motion_scale = Vector2(0.5, 0.5)
+
+[node name="Monster" parent="Bg/Monster" instance=ExtResource("3_gbb38")]
+visible = false
+position = Vector2(-26, 174)
+
+[node name="BreathingSFX" type="AudioStreamPlayer2D" parent="Bg/Monster/Monster"]
+stream = ExtResource("12_bbkp0")
+volume_db = -80.0
+autoplay = true
+bus = &"SFX"
+
+[node name="RoarSFX" type="AudioStreamPlayer2D" parent="Bg/Monster/Monster"]
+stream = ExtResource("14_h6ggk")
+
+[node name="OutsideBlack" type="ColorRect" parent="Bg/Monster"]
+visible = false
+offset_left = -85.0
+offset_top = -65.0
+offset_right = 584.0
+offset_bottom = 400.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+
+[node name="Locker" type="ParallaxLayer" parent="Bg"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Bg/Locker"]
+position = Vector2(251, 144)
+texture = ExtResource("1_jly2u")
+
+[node name="HelpNumber" type="Sprite2D" parent="Bg/Locker"]
+modulate = Color(1, 1, 1, 0.556863)
+position = Vector2(233, 4)
+texture = ExtResource("8_q8qq8")
+
+[node name="FlashLight" type="PointLight2D" parent="Bg/Locker"]
+z_index = 3
+position = Vector2(240, 30)
+color = Color(1, 1, 0.619608, 0.952941)
+energy = 3.9
+range_layer_min = -1
+texture = ExtResource("9_yv5yu")
+script = ExtResource("10_w36uy")
+
+[node name="AllBlack" type="ColorRect" parent="Bg"]
+visible = false
+offset_left = -284.0
+offset_top = -275.0
+offset_right = 785.0
+offset_bottom = 595.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0.75)
+
+[node name="Tablet" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="TabletDevice" type="Control" parent="Tablet"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 127.0
+offset_top = 59.0
+offset_right = 377.0
+offset_bottom = 267.0
+pivot_offset = Vector2(125, 104)
+script = ExtResource("3_je40m")
+
+[node name="OffScreen" type="ColorRect" parent="Tablet/TabletDevice"]
+layout_mode = 0
+offset_right = 248.0
+offset_bottom = 169.0
+mouse_filter = 1
+color = Color(0, 0, 0, 1)
+
+[node name="Screen" type="PanelContainer" parent="Tablet/TabletDevice"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 8.0
+offset_right = 238.0
+offset_bottom = 151.0
+mouse_filter = 1
+
+[node name="TabContainer" type="TabContainer" parent="Tablet/TabletDevice/Screen"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_m1xg6")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/tab_selected = SubResource("StyleBoxFlat_tbybm")
+theme_override_styles/tabbar_background = SubResource("StyleBoxFlat_sd10q")
+
+[node name="Help" parent="Tablet/TabletDevice/Screen/TabContainer" instance=ExtResource("5_7ir57")]
+layout_mode = 2
+
+[node name="Cmd" parent="Tablet/TabletDevice/Screen/TabContainer" instance=ExtResource("3_vh53a")]
+visible = false
+layout_mode = 2
+
+[node name="Vars" parent="Tablet/TabletDevice/Screen/TabContainer" instance=ExtResource("5_cdqy1")]
+visible = false
+layout_mode = 2
+
+[node name="Noise" type="ColorRect" parent="Tablet/TabletDevice/Screen"]
+material = SubResource("ShaderMaterial_00tk1")
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.380392, 0.380392, 0.380392, 1)
+
+[node name="Case" type="TextureRect" parent="Tablet/TabletDevice"]
+layout_mode = 2
+offset_right = 252.0
+offset_bottom = 206.0
+mouse_filter = 2
+texture = ExtResource("3_qam55")
+
+[node name="Area2D" type="Area2D" parent="Tablet/TabletDevice"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tablet/TabletDevice/Area2D"]
+position = Vector2(126, 103.5)
+shape = SubResource("RectangleShape2D_vb1ij")
+
+[node name="NoiseSFX" type="AudioStreamPlayer2D" parent="Tablet/TabletDevice"]
+stream = ExtResource("17_me2qp")
+volume_db = -25.0
+bus = &"SFX"
+
+[node name="DeathLayer" type="CanvasLayer" parent="."]
+
+[node name="MonsterDeath" type="Sprite2D" parent="DeathLayer"]
+position = Vector2(236, 750)
+scale = Vector2(2, 2)
+texture = ExtResource("24_d133l")
+script = ExtResource("25_e406g")
+
+[node name="Sprite2D" type="Sprite2D" parent="DeathLayer/MonsterDeath"]
+position = Vector2(18, -85)
+texture = ExtResource("25_lbhh3")
+
+[node name="Scream" type="AudioStreamPlayer2D" parent="DeathLayer"]
+stream = ExtResource("28_gnk7g")
+
+[node name="AmbienceSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("18_ye0ol")
+volume_db = -13.117
+autoplay = true
+bus = &"Ambience"
+
+[connection signal="mouse_entered" from="Tablet/TabletDevice/Area2D" to="Tablet/TabletDevice" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Tablet/TabletDevice/Area2D" to="Tablet/TabletDevice" method="_on_mouse_exited"]

@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=3 uid="uid://bovf8rv1i70c7"]
+
+[ext_resource type="Script" path="res://src/phone/HelpWindow.gd" id="1_0p4a7"]
+[ext_resource type="FontFile" uid="uid://bkkp7t6seakgk" path="res://assets/fonts/dogicapixel.ttf" id="2_wkr4l"]
+[ext_resource type="FontFile" uid="uid://i5bj20gjxctw" path="res://assets/fonts/dogicapixelbold.ttf" id="3_6gqjc"]
+
+[node name="HelpWindow" type="PanelContainer" node_paths=PackedStringArray("label")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -242.0
+offset_bottom = -132.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0p4a7")
+label = NodePath("MarginContainer/RichTextLabel")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 1, 0, 1)
+theme_override_constants/line_separation = 5
+theme_override_fonts/normal_font = ExtResource("2_wkr4l")
+theme_override_fonts/bold_font = ExtResource("3_6gqjc")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "FONT"
+meta_underlined = false
+
+[connection signal="meta_clicked" from="MarginContainer/RichTextLabel" to="." method="_on_meta_clicked"]

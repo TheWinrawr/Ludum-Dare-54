@@ -1,0 +1,116 @@
+[gd_scene load_steps=12 format=3 uid="uid://ruoql3hn7g5q"]
+
+[ext_resource type="Shader" path="res://src/shaders/glitch.gdshader" id="1_e5upr"]
+[ext_resource type="Texture2D" uid="uid://c5rl5emsri3sk" path="res://icon.svg" id="1_itetm"]
+[ext_resource type="Shader" path="res://src/shaders/crt.gdshader" id="3_bithd"]
+[ext_resource type="Script" path="res://src/mangers/CommandManager.gd" id="4_oa0yc"]
+[ext_resource type="PackedScene" uid="uid://dnvo7d2f23xxc" path="res://src/phone/CodeWindow.tscn" id="5_6o8jb"]
+[ext_resource type="PackedScene" uid="uid://csg0038kdyhb8" path="res://src/phone/TypeBox.tscn" id="6_tsqtj"]
+[ext_resource type="Texture2D" uid="uid://docthfg3cy2em" path="res://assets/sprites/flashlight.png" id="7_j878s"]
+[ext_resource type="Texture2D" uid="uid://beaaa6piawapb" path="res://assets/sprites/locker_front.png" id="7_u76eo"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uvm3n"]
+shader = ExtResource("3_bithd")
+shader_parameter/size = 0.01
+shader_parameter/alpha = 0.2
+shader_parameter/shake_rate = 3.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_awren"]
+shader = ExtResource("3_bithd")
+shader_parameter/size = 0.01
+shader_parameter/alpha = 0.2
+shader_parameter/shake_rate = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2jbog"]
+shader = ExtResource("1_e5upr")
+shader_parameter/crt_curve = 0.02
+shader_parameter/crt_scan_line_color = 0.347
+shader_parameter/aperture_grille_rate = 0.4
+shader_parameter/rf_switch_esque_blur = 1.0
+shader_parameter/white_noise_rate = 0.0
+
+[node name="Sandbox" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+offset_right = 337.0
+offset_bottom = 331.0
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+layout_mode = 0
+offset_right = 83.0
+offset_bottom = 83.0
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+material = SubResource("ShaderMaterial_uvm3n")
+layout_mode = 0
+offset_left = 364.0
+offset_top = 59.0
+offset_right = 492.0
+offset_bottom = 187.0
+texture = ExtResource("1_itetm")
+
+[node name="ColorRect2" type="ColorRect" parent="Control"]
+material = SubResource("ShaderMaterial_awren")
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -83.0
+offset_top = -41.5
+offset_bottom = 41.5
+grow_horizontal = 0
+grow_vertical = 2
+color = Color(0.317647, 0.321569, 0.639216, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="GridContainer" type="GridContainer" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Node2D" type="Node2D" parent="."]
+visible = false
+position = Vector2(167, 146)
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D"]
+material = SubResource("ShaderMaterial_2jbog")
+texture = ExtResource("1_itetm")
+
+[node name="CommandManager" type="Node" parent="." node_paths=PackedStringArray("code_window")]
+script = ExtResource("4_oa0yc")
+code_window = NodePath("../CodeWindow")
+
+[node name="CodeWindow" parent="." instance=ExtResource("5_6o8jb")]
+visible = false
+layout_mode = 1
+offset_right = -161.0
+offset_bottom = -41.0
+
+[node name="TypeBox" parent="." instance=ExtResource("6_tsqtj")]
+visible = false
+layout_mode = 2
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_top = 156.0
+offset_right = 242.0
+offset_bottom = 209.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(242, 122)
+texture = ExtResource("7_u76eo")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(236, 7)
+texture = ExtResource("7_j878s")

@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://3b7finkmm3c5"]
+
+[ext_resource type="Texture2D" uid="uid://dtc0yow14ivdd" path="res://assets/sprites/monster/monster.png" id="1_srrpt"]
+[ext_resource type="Texture2D" uid="uid://e0o2kbwniieg" path="res://assets/sprites/monster/teeth.png" id="2_inosb"]
+
+[node name="Monster" type="Node2D"]
+
+[node name="Graphics" type="Node2D" parent="."]
+
+[node name="Body" type="Sprite2D" parent="Graphics"]
+texture = ExtResource("1_srrpt")
+
+[node name="Teeth" type="Sprite2D" parent="Graphics"]
+position = Vector2(18, -70)
+texture = ExtResource("2_inosb")

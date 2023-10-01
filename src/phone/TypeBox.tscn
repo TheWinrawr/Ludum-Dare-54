@@ -1,0 +1,46 @@
+[gd_scene load_steps=4 format=3 uid="uid://csg0038kdyhb8"]
+
+[ext_resource type="Script" path="res://src/phone/TypeBox.gd" id="1_oab04"]
+[ext_resource type="FontFile" uid="uid://bkkp7t6seakgk" path="res://assets/fonts/dogicapixel.ttf" id="2_w826u"]
+[ext_resource type="AudioStream" uid="uid://b3mcgtnow185i" path="res://assets/sfx/typing.wav" id="3_pl2i6"]
+
+[node name="TypeBox" type="PanelContainer" node_paths=PackedStringArray("line_edit", "char_counter")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -394.0
+offset_bottom = -320.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_oab04")
+line_edit = NodePath("LineEdit")
+char_counter = NodePath("Label")
+
+[node name="LineEdit" type="LineEdit" parent="."]
+layout_mode = 2
+theme_override_colors/caret_color = Color(1, 1, 1, 1)
+theme_override_constants/caret_width = 3
+theme_override_fonts/font = ExtResource("2_w826u")
+theme_override_font_sizes/font_size = 8
+placeholder_text = "Type commands here"
+max_length = 15
+context_menu_enabled = false
+shortcut_keys_enabled = false
+middle_mouse_paste_enabled = false
+selecting_enabled = false
+caret_blink = true
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_w826u")
+theme_override_font_sizes/font_size = 8
+text = "aaa"
+horizontal_alignment = 2
+vertical_alignment = 2
+autowrap_mode = 3
+
+[node name="TypingSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_pl2i6")
+bus = &"SFX"
+
+[connection signal="text_changed" from="LineEdit" to="." method="_on_line_edit_text_changed"]

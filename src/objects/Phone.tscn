@@ -1,0 +1,87 @@
+[gd_scene load_steps=6 format=3 uid="uid://bigu53yrpkjn2"]
+
+[ext_resource type="Script" path="res://src/objects/Phone.gd" id="1_ss032"]
+[ext_resource type="FontFile" uid="uid://8bbwbrtch4an" path="res://assets/fonts/IBM_Plex_Mono/IBMPlexMono-Medium.ttf" id="2_hndf0"]
+[ext_resource type="Shader" path="res://src/shaders/crt.gdshader" id="2_ycoo7"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_rq5p1"]
+font = ExtResource("2_hndf0")
+font_size = 24
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7o30c"]
+shader = ExtResource("2_ycoo7")
+shader_parameter/size = 0.01
+shader_parameter/alpha = 0.054
+shader_parameter/shake_rate = 3.684
+
+[node name="Phone" type="PanelContainer" node_paths=PackedStringArray("textbox", "response_box")]
+offset_right = 495.0
+offset_bottom = 306.0
+script = ExtResource("1_ss032")
+textbox = NodePath("Screen/Tabs/Msgs/TypeHere")
+response_box = NodePath("Screen/Tabs/Msgs/Query/RichTextLabel")
+
+[node name="Bg" type="ColorRect" parent="."]
+layout_mode = 2
+color = Color(0.184314, 0.231373, 0.32549, 1)
+
+[node name="Screen" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Bg" type="ColorRect" parent="Screen"]
+layout_mode = 2
+color = Color(0.596078, 0.596078, 0.596078, 1)
+
+[node name="Tabs" type="TabContainer" parent="Screen"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Help" type="RichTextLabel" parent="Screen/Tabs"]
+layout_mode = 2
+bbcode_enabled = true
+text = "-Don't alert the monster
+-Test"
+
+[node name="Msgs" type="VBoxContainer" parent="Screen/Tabs"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 3
+
+[node name="Query" type="MarginContainer" parent="Screen/Tabs/Msgs"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 4.43
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="RichTextLabel" type="Label" parent="Screen/Tabs/Msgs/Query"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_hndf0")
+theme_override_font_sizes/font_size = 24
+text = "What is your query?"
+label_settings = SubResource("LabelSettings_rq5p1")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+uppercase = true
+
+[node name="TypeHere" type="RichTextLabel" parent="Screen/Tabs/Msgs"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.36
+theme_override_fonts/normal_font = ExtResource("2_hndf0")
+bbcode_enabled = true
+text = "[color=dark_gray]test test [color=green]test[/color] test[/color]"
+scroll_active = false
+
+[node name="Bg2" type="ColorRect" parent="Screen"]
+material = SubResource("ShaderMaterial_7o30c")
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.596078, 0.596078, 0.596078, 1)
